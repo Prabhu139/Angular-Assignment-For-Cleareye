@@ -1,0 +1,22 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* You can choose other themes such as deeppurple-amber.css, pink-bluegrey.css, etc. */
+
+mat-card {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  mat-card-title {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  /* Add space between form fields */
+.mat-form-field {
+    margin-bottom: 20px;
+  }

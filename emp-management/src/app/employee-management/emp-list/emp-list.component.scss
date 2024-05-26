@@ -1,0 +1,30 @@
+.employee-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filters {
+    margin-bottom: 20px;
+  }
+  
+  .filters label {
+    margin-right: 10px;
+  }
+  
+  .employees {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .employee {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .employee button {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  

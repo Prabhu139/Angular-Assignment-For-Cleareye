@@ -1,0 +1,33 @@
+{
+    "employees": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "designation": "Software Engineer",
+        "location": "New York",
+        "status": "active"
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "designation": "Project Manager",
+        "location": "San Francisco",
+        "status": "inactive"
+      },
+      {
+        "id": 3,
+        "name": "Alice Johnson",
+        "designation": "UI/UX Designer",
+        "location": "Los Angeles",
+        "status": "temporarily suspended"
+      },
+      {
+        "id": 4,
+        "name": "Bob Williams",
+        "designation": "System Administrator",
+        "location": "Chicago",
+        "status": "terminated"
+      }
+    ]
+  }
+  

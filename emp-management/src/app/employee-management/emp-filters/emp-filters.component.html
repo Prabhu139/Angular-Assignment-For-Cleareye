@@ -1,0 +1,7 @@
+<div [formGroup]="filtersForm">
+    <label><input type="checkbox" formControlName="id"> Employee ID</label>
+    <label><input type="checkbox" formControlName="designation"> Designation</label>
+    <label><input type="checkbox" formControlName="location"> Location</label>
+    <button (click)="applyFilters()">Apply Filters</button>
+</div>
+  

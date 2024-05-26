@@ -1,0 +1,21 @@
+
+<div class="questionnaire-container" *ngIf="!isSubmitted">
+    <h1>Questionnaire</h1>
+    <div class="question" *ngFor="let question of questions; let i = index">
+      <p class="question-text">{{ i + 1 }}. {{ question.questionText }}</p>
+      <div class="options-container">
+        <div class="option" *ngFor="let option of question.options">
+          <input type="radio" name="{{ question.id }}" [(ngModel)]="question.selectedOption" [value]="option">{{ option }}
+        </div>
+      </div>
+      <!-- <p class="error-message" *ngIf="!question.selectedOption && isSubmitted">field required</p> -->
+    </div>
+    <button class="submit-btn" (click)="onSubmit()">Submit</button>
+</div>
+
+
+  
+<div class="score-container" *ngIf="isSubmitted">
+    <h1>Assessment Result</h1>
+    <p class="score" [ngClass]="{ 'success-message': score >= 60, 'error-message': score < 60 }">Your score is: {{ score }}</p>
+</div>
