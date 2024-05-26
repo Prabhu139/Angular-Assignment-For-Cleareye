@@ -29,7 +29,11 @@ export class EmployeeService {
       })
     ).subscribe();
   }
-  
+
+  getEmployeeById(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.employeesUrl}/${id}`);
+  }
+
   addEmployee(newEmployee: Employee): void {
     this.employees = this.employees || []; // Ensure employees is initialized as an array
     console.log(this.employees, 'from ser')

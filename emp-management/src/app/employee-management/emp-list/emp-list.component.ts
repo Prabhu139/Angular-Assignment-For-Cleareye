@@ -70,6 +70,7 @@ export class EmpListComponent implements OnInit {
 
   editEmployee(employee: Employee): void {
     // Implement edit functionality here
+    this.router.navigate(['edit', employee.id]);
   }
 
   deleteEmployee(employee: Employee): void {
