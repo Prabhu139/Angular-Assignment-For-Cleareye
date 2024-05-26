@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { PdfServiceService } from '../pdf-service.service';
 import { EmployeeService } from '../employee.service';
 import { Employee } from '../employee.model';
 import { Router } from '@angular/router';
@@ -10,50 +9,56 @@ import { Router } from '@angular/router';
   styleUrls: ['./emp-list.component.scss']
 })
 export class EmpListComponent implements OnInit {
-  // employees: any = [];
-   employees: Employee[] = [];
-  filteredEmployees: any = [];
+  employees: Employee[] = [];
+  filteredEmployees: Employee[] = [];
   filters: { id: boolean, designation: boolean, location: boolean } = { id: false, designation: false, location: false };
   displayedColumns: string[] = ['name', 'designation', 'location', 'status', 'actions'];
+  selectedTab: number = 0;
 
-  constructor(private empSerRef : EmployeeService, 
-    private router: Router,
-
-  ) {}
+  constructor(private empSerRef: EmployeeService, private router: Router) {}
 
   ngOnInit(): void {
     this.empSerRef.getEmployees().subscribe((res: any) => {
-      // console.log(employees, 'emp..')
       this.employees = res.employees;
-      // this.filteredEmployees = [...this.employees];
+      this.filterEmployeesByStatus();
     });
   }
 
+  filterEmployeesByStatus(): void {
+    switch (this.selectedTab) {
+      case 0: this.filteredEmployees = this.employees; break; // All Employees
+      case 1: this.filteredEmployees = this.employees.filter(e => e.status === 'active'); break; // Active
+      case 2: this.filteredEmployees = this.employees.filter(e => e.status === 'inactive'); break; // Inactive
+      case 3: this.filteredEmployees = this.employees.filter(e => e.status === 'temporarily suspended'); break; // Temporarily Suspended
+      case 4: this.filteredEmployees = this.employees.filter(e => e.status === 'terminated'); break; // Terminated
+    }
+  }
+
+  onTabChange(index: number): void {
+    this.selectedTab = index;
+    this.filterEmployeesByStatus();
+  }
+
   filterEmployees(filters: any): void {
-    this.filteredEmployees = this.employees.filter((employee : any) => {
+    this.filteredEmployees = this.employees.filter((employee: any) => {
+      const filterId = filters.id ? filters.id.toString().toLowerCase() : null;
+      const filterDesignation = filters.designation ? filters.designation.toString().toLowerCase() : null;
+      const filterLocation = filters.location ? filters.location.toString().toLowerCase() : null;
+
       return (
-        (!filters.id || employee.id.toString().toLowerCase().includes(filters.id.toString().toLowerCase())) &&
-        (!filters.designation || employee.designation.toLowerCase().includes(filters.designation.toLowerCase())) &&
-        (!filters.location || employee.location.toLowerCase().includes(filters.location.toLowerCase()))
+        (!filterId || employee.id.toString().toLowerCase().includes(filterId)) &&
+        (!filterDesignation || employee.designation.toLowerCase().includes(filterDesignation)) &&
+        (!filterLocation || employee.location.toLowerCase().includes(filterLocation))
       );
     });
   }
 
-  navigateToAddEmployee(){
-    this.router.navigate(['add', { from: 'emp_l' }])
-
+  navigateToAddEmployee(): void {
+    this.router.navigate(['add', { from: 'emp_l' }]);
   }
 
-  // addEmployee(newEmployee: Employee): void {
-  //   // Assigning ID is not covered here, assuming it's handled by the backend or some other logic
-  //   this.employees.push({ ...newEmployee, id: this.employees.length + 1 });
-  //   this.empSerRef.updateEmployeeList(this.employees).subscribe(() => {
-  //     console.log('Employee added successfully!');
-  //   });
-  // }
-
   updateStatus(): void {
-    this.employees.forEach((employee:any) => {
+    this.employees.forEach((employee: any) => {
       if (employee.status === 'temporarily_suspended') {
         employee.status = 'inactive';
       }
@@ -64,10 +69,14 @@ export class EmpListComponent implements OnInit {
   }
 
   editEmployee(employee: Employee): void {
-    // Write logic to edit employee details
+    // Implement edit functionality here
   }
 
   deleteEmployee(employee: Employee): void {
-    // Write logic to delete employee from the list
+    this.employees = this.employees.filter(e => e.id !== employee.id);
+    this.empSerRef.updateEmployeeList(this.employees).subscribe(() => {
+      console.log('Employee deleted successfully!');
+      this.filterEmployeesByStatus();
+    });
   }
 }

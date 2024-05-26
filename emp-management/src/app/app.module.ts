@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { QuestionnaireModule } from './questionnaire/questionnaire.module';
+import { MatTabGroup } from '@angular/material/tabs';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { QuestionnaireModule } from './questionnaire/questionnaire.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    // MatTabGroup
     EmployeeManagementModule,
   ],
   providers: [],

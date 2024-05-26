@@ -33,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatSelectModule,
     MatCardModule,
+    MatTabsModule,
     BrowserAnimationsModule,
     // MaterialModule
     
